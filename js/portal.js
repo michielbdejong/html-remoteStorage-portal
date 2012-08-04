@@ -5,7 +5,7 @@ $(document).ready(function () {
     var authorizeEndpoint = 'http://localhost/php-oauth/authorize.php';
     var apiEndpoint = 'http://localhost/php-oauth/api.php';
 
-    var remoteStorageEndpoint = 'http://php-oauth/php-remoteStorage/api.php';
+    var remoteStorageEndpoint = 'http://localhost/php-remoteStorage/api.php';
 
     jso_configure({
         "remotestorage_portal": {
@@ -45,32 +45,19 @@ $(document).ready(function () {
         });
     }
 
-    function getResourceOwner() {
-        /*$.oajax({
-            url: apiEndpoint + "/resource_owner/id",
-            jso_provider: "remotestorage_portal",
-            jso_scopes: apiScopes,
-            async: false,
-            jso_allowia: true,
-            dataType: 'json',
-            success: function (data) {
-                userId = data.id;
-                $("#userId").append(data.name);
-                $("#userId").attr('title', data.user_id);
-            }
-        });*/
-    }
-
     function addAvailableApplicationsListHandlers() {
         $("button.installApplication").click(function() {
-            alert("installing!");
+            installAvailableApplication($(this).data('clientId'), ':rw');
         });
     }
 
     function addInstalledApplicationsListHandlers() {
         $("button.removeApplication").click(function () {
-          
+            if (confirm("Are you sure you want to remove the application '" + $(this).data('clientName') + "'?")) {
+                removeInstalledApplication($(this).data('clientId'));
+            }
         });
+
         $("button.launchApplication").click(function() {
             var redirectUri = $(this).data('redirectUri');
             $.oajax({
@@ -86,8 +73,35 @@ $(document).ready(function () {
         });
     }
 
+    function installAvailableApplication(clientId, scope) {
+        $.oajax({
+            url: apiEndpoint + "/authorizations/",
+            jso_provider: "remotestorage_portal",
+            jso_scopes: apiScope,
+            jso_allowia: true,
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({'client_id': clientId, 'scope': scope}),
+            success: function (data) {
+                renderInstalledApplicationsList();
+            }
+        });
+    }
+
+    function removeInstalledApplication(clientId) {
+        $.oajax({
+            url: apiEndpoint + "/authorizations/" + clientId,
+            jso_provider: "remotestorage_portal",
+            jso_scopes: apiScope,
+            jso_allowia: true,
+            type: "DELETE",
+            success: function (data) {
+                renderInstalledApplicationsList();
+            }
+        });
+    }
+
     function initPage() {
-        getResourceOwner();
         renderInstalledApplicationsList();
         renderAvailableApplicationsList();
     }
