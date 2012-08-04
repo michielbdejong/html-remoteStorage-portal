@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Portal</title>
+    <script src="ext/js/jquery.js"></script>
+    <script src="ext/js/jsrender.js"></script>
+    <script src="ext/js/jso.js"></script>
+    <script src="js/portal.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/default.css">
+  </head>
+
+  <body>
+
+    <div id="container">
+        <h1>Portal</h1>
+
+        <h2>Installed Applications</h2>
+
+        <table>
+        	<tbody id="installedApplicationsList"></tbody>
+        </table>
+
+        <h2>Available Applications</h2>
+
+        <table>
+        	<tbody id="availableApplicationsList"></tbody>
+        </table>
+
+    </div> <!-- /container -->
+
+    <script id="installedApplicationsListTemplate" type="text/x-jsrender">
+        <tr>
+            <td><span title="{{:description}}">{{:name}}</span></td>
+            <td>
+                <button class="launchApplication" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">Launch</button> 
+                <button class="removeApplication" data-client-name="{{:name}}" data-client-id="{{:id}}">Remove</button>
+            </td>
+        </tr>
+    </script>
+
+    <script id="availableApplicationsListTemplate" type="text/x-jsrender">
+        <tr>
+            <td><span title="{{:description}}">{{:name}}</span></td>
+            <td>
+                <button class="installApplication" data-client-id="{{:id}}">Install</button>
+            </td>
+        </tr>
+    </script>
+   
+  </body>
+</html>
+
