@@ -23,11 +23,23 @@
     </ul>
 
     <script id="installedApplicationsTemplate" type="text/x-jsrender">
-        <li class="launchApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}"><img src="assets/HTML5_Logo_128.png"><span>{{:name}}</span></li>
+        <li class="launchApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">
+        {{if icon}}
+               <img src="{{:icon}}">
+        {{else}}
+               <img src="assets/HTML5_Logo_128.png">
+        {{/if}}
+        <span>{{:name}}</span></li>
     </script>
 
     <script id="availableApplicationsTemplate" type="text/x-jsrender">
-        <li class="installApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}"><img src="assets/HTML5_Logo_128.png"><span>{{:name}}</span></li>
+        <li class="installApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">
+        {{if icon}}
+               <img src="{{:icon}}">
+        {{else}}
+               <img src="assets/HTML5_Logo_128.png">
+        {{/if}}
+        <span>{{:name}}</span></li>
     </script>
    
   </body>
