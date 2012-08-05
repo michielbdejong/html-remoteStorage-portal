@@ -12,40 +12,22 @@
 
   <body>
 
-    <div id="portal">
-        <h1>Portal</h1>
+    <h1>My Apps</h1>
 
-        <h2>Installed Applications</h2>
+    <ul id="installedApplications">
+    </ul>
 
-        <table id="installedApplicationsTable">
-        	<tbody id="installedApplicationsList"></tbody>
-        </table>
+    <h1>Available Apps</h1>
 
-        <h2>Available Applications</h2>
+    <ul id="availableApplications">
+    </ul>
 
-        <table id="availableApplicationsTable">
-        	<tbody id="availableApplicationsList"></tbody>
-        </table>
-
-    </div> <!-- /container -->
-
-    <script id="installedApplicationsListTemplate" type="text/x-jsrender">
-        <tr>
-            <td><span title="{{:description}}">{{:name}}</span></td>
-            <td>
-                <button class="launchApplication" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">Launch</button> 
-                <button class="removeApplication" data-client-name="{{:name}}" data-client-id="{{:id}}">Remove</button>
-            </td>
-        </tr>
+    <script id="installedApplicationsTemplate" type="text/x-jsrender">
+        <li class="launchApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}"><img src="assets/HTML5_Logo_128.png"><span>{{:name}}</span></li>
     </script>
 
-    <script id="availableApplicationsListTemplate" type="text/x-jsrender">
-        <tr>
-            <td><span title="{{:description}}">{{:name}}</span></td>
-            <td>
-                <button class="installApplication" data-client-id="{{:id}}">Install</button>
-            </td>
-        </tr>
+    <script id="availableApplicationsTemplate" type="text/x-jsrender">
+        <li class="installApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}"><img src="assets/HTML5_Logo_128.png"><span>{{:name}}</span></li>
     </script>
    
   </body>

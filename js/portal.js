@@ -25,7 +25,7 @@ $(document).ready(function () {
             jso_allowia: true,
             dataType: 'json',
             success: function (data) {
-                $("#installedApplicationsList").html($("#installedApplicationsListTemplate").render(data));
+                $("#installedApplications").html($("#installedApplicationsTemplate").render(data));
                 addInstalledApplicationsListHandlers();
             }
         });
@@ -39,14 +39,14 @@ $(document).ready(function () {
             jso_allowia: true,
             dataType: 'json',
             success: function (data) {
-                $("#availableApplicationsList").html($("#availableApplicationsListTemplate").render(data));
+                $("#availableApplications").html($("#availableApplicationsTemplate").render(data));
                 addAvailableApplicationsListHandlers();
             }
         });
     }
 
     function addAvailableApplicationsListHandlers() {
-        $("button.installApplication").click(function() {
+        $("li.installApplication").click(function() {
             installAvailableApplication($(this).data('clientId'), ':rw');
         });
     }
@@ -58,7 +58,7 @@ $(document).ready(function () {
             }
         });
 
-        $("button.launchApplication").click(function() {
+        $("li.launchApplication").click(function() {
             var redirectUri = $(this).data('redirectUri');
             $.oajax({
                 url: apiEndpoint + "/resource_owner/id",
