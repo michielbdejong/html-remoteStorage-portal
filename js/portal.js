@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     function addAvailableApplicationsListHandlers() {
         $("li.installApplication").click(function() {
-            installAvailableApplication($(this).data('clientId'), ':rw');
+            installAvailableApplication($(this).data('clientId'), $(this).data('allowedScope'));
         });
     }
 

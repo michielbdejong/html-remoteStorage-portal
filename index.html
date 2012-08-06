@@ -33,7 +33,7 @@
     </script>
 
     <script id="availableApplicationsTemplate" type="text/x-jsrender">
-        <li class="installApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">
+        <li class="installApplication" title="{{:description}}" data-allowed-scope="{{:allowed_scope}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">
         {{if icon}}
                <img src="{{:icon}}">
         {{else}}
