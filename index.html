@@ -12,34 +12,42 @@
 
   <body>
 
-    <h1>My Apps</h1>
+    <h1>Portal</h1>
 
-    <ul id="installedApplications">
-    </ul>
+    <div id="installedApplicationsList">
+        <h2>My Applications <button id="editApplications">Edit</button></h2>
+        <ul id="installedApplications">
+        </ul>
+    </div>
 
-    <h1>Available Apps</h1>
-
-    <ul id="availableApplications">
-    </ul>
+    <div id="availableApplicationsList">
+        <h2>Available Applications</h2>
+        <p>Click on an application icon to add it to your personal list of applications.</p>
+        <ul id="availableApplications">
+        </ul>
+    </div>
 
     <script id="installedApplicationsTemplate" type="text/x-jsrender">
-        <li class="launchApplication" title="{{:description}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">
+        <li class="launchApplication" title="{{:name}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">
+        <button class="removeApplication" data-client-name="{{:name}}" data-client-id="{{:id}}">Remove</button>
         {{if icon}}
-               <img src="{{:icon}}">
+               <img src="{{:icon}}" alt="{{:name}}">
         {{else}}
-               <img src="assets/HTML5_Logo_128.png">
+               <img src="assets/HTML5_Logo_128.png" alt="{{:name}}">
         {{/if}}
-        <span>{{:name}}</span></li>
+        <span>{{:name}}</span>
+        </li>
     </script>
 
     <script id="availableApplicationsTemplate" type="text/x-jsrender">
         <li class="installApplication" title="{{:description}}" data-allowed-scope="{{:allowed_scope}}" data-client-name="{{:name}}" data-redirect-uri="{{:redirect_uri}}" data-client-id="{{:id}}">
         {{if icon}}
-               <img src="{{:icon}}">
+               <img src="{{:icon}}" alt="{{:name}}">
         {{else}}
-               <img src="assets/HTML5_Logo_128.png">
+               <img src="assets/HTML5_Logo_128.png" alt="{{:name}}">
         {{/if}}
-        <span>{{:name}}</span></li>
+        <span>{{:name}}</span>
+        </li>
     </script>
    
   </body>

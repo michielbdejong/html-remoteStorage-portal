@@ -17,7 +17,17 @@ $(document).ready(function () {
         "remotestorage_portal": apiScope
     });
 
-    function renderInstalledApplicationsList() {
+    $("button#editApplications").click(function() {
+        if($('div#availableApplicationsList').is(":visible")) {
+            $("div#availableApplicationsList").hide();
+            renderInstalledApplicationsList("launch");
+        } else {
+            $("div#availableApplicationsList").show();
+            renderInstalledApplicationsList("delete");
+        }
+    });
+
+    function renderInstalledApplicationsList(mode) {
         $.oajax({
             url: apiEndpoint + "/authorizations/",
             jso_provider: "remotestorage_portal",
@@ -26,7 +36,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 $("#installedApplications").html($("#installedApplicationsTemplate").render(data));
-                addInstalledApplicationsListHandlers();
+                addInstalledApplicationsListHandlers(mode);
             }
         });
     }
@@ -51,26 +61,30 @@ $(document).ready(function () {
         });
     }
 
-    function addInstalledApplicationsListHandlers() {
-        $("button.removeApplication").click(function () {
-            if (confirm("Are you sure you want to remove the application '" + $(this).data('clientName') + "'?")) {
-                removeInstalledApplication($(this).data('clientId'));
-            }
-        });
-
-        $("li.launchApplication").click(function() {
-            var redirectUri = $(this).data('redirectUri');
-            $.oajax({
-                url: apiEndpoint + "/resource_owner/id",
-                jso_provider: "remotestorage_portal",
-                jso_scopes: apiScope,
-                jso_allowia: true,
-                dataType: 'json',
-                success: function (data) {
-                    window.location = redirectUri + "#storage_root=" + remoteStorageEndpoint + "/" + data.id + "&authorize_endpoint=" + authorizeEndpoint;
+    function addInstalledApplicationsListHandlers(mode) {
+        if(mode === "launch") {
+            $("button.removeApplication").hide();
+            $("li.launchApplication").click(function() {
+                var redirectUri = $(this).data('redirectUri');
+                $.oajax({
+                    url: apiEndpoint + "/resource_owner/id",
+                    jso_provider: "remotestorage_portal",
+                    jso_scopes: apiScope,
+                    jso_allowia: true,
+                    dataType: 'json',
+                    success: function (data) {
+                        window.location = redirectUri + "#storage_root=" + remoteStorageEndpoint + "/" + data.id + "&authorize_endpoint=" + authorizeEndpoint;
+                    }
+                });
+            });
+        } else {
+            $("button.removeApplication").show();
+            $("button.removeApplication").click(function () {
+                if (confirm("Are you sure you want to remove the application '" + $(this).data('clientName') + "'?")) {
+                    removeInstalledApplication($(this).data('clientId'));
                 }
             });
-        });
+        }
     }
 
     function installAvailableApplication(clientId, scope) {
@@ -96,13 +110,13 @@ $(document).ready(function () {
             jso_allowia: true,
             type: "DELETE",
             success: function (data) {
-                renderInstalledApplicationsList();
+                renderInstalledApplicationsList("delete");
             }
         });
     }
 
     function initPage() {
-        renderInstalledApplicationsList();
+        renderInstalledApplicationsList("launch");
         renderAvailableApplicationsList();
     }
     initPage();
