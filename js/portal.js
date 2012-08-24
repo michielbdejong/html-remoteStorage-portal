@@ -95,7 +95,7 @@ $(document).ready(function () {
             jso_allowia: true,
             type: "POST",
             dataType: 'json',
-            data: JSON.stringify({'client_id': clientId, 'scope': scope}),
+            data: JSON.stringify({'client_id': clientId, 'scope': scope, 'refresh_token': false}),
             success: function (data) {
                 renderInstalledApplicationsList();
             }
