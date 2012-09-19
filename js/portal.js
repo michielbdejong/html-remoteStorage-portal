@@ -2,10 +2,10 @@ $(document).ready(function () {
     var apiClientId = 'remotestorage_portal';
     var apiScope = ["authorizations", "applications"];
 
-    var authorizeEndpoint = 'http://localhost/php-oauth/authorize.php';
-    var apiEndpoint = 'http://localhost/php-oauth/api.php';
+    var authorizeEndpoint = '/php-oauth/authorize.php';
+    var apiEndpoint = '/php-oauth/api.php';
 
-    var remoteStorageEndpoint = 'http://localhost/php-remoteStorage/api.php';
+    var remoteStorageEndpoint = '/php-remoteStorage/api.php';
 
     jso_configure({
         "remotestorage_portal": {
